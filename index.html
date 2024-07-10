@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: [
+              "Helvetica Neue",
+              "Helvetica",
+              "PingFang SC",
+              "Hiragino Sans GB",
+              "Arial",
+              "sans-serif",
+            ],
+          },
+        },
+      },
+    };
+  </script>
+
+  <body class="font-sans">
+    <main id="main">
+      <div
+        class="py-12 w-full h-full flex flex-col justify-between items-center"
+      >
+        <div class="flex flex-col justify-center items-center">
+          <span class="font-light text-2xl lg:text-2xl">Result</span>
+          <span id="a"></span>
+        </div>
+        <div class="flex flex-col justify-center items-center gap-1">
+          <img class="py-6" src="success.6e0b5feb.png" alt="" />
+          <span class="font-semibold text-xl lg:text-xl"
+            >Liveness Detection succeed</span
+          >
+          <span class="text-sm font-light">Score：97</span>
+        </div>
+        <div
+          class="flex flex-col justify-center items-center w-full lg:w-1/2 md:w-1/2"
+        >
+          <a
+            href="https://apidocs.gcp.bankina.id/complete?successCode=SUCCESS&version=image"
+            class="h-10 w-4/5 px-6 py-2 font-medium rounded-md bg-[#38a822] text-white text-center"
+            >Next Step</a
+          >
+          <span id="next" class="text-xs py-4 font-extralight"
+            >Go to next process after 3 seconds</span
+          >
+        </div>
+      </div>
+    </main>
+    <script>
+      var a = window.innerHeight;
+      var el = document.getElementById("main");
+      var next = document.getElementById("next");
+
+      el.setAttribute("class", `w-screen h-[${a}px]`);
+
+      window.addEventListener("load", function () {
+        let i = 3;
+        loop();
+        function loop() {
+          next.innerText = `Go to next process after ${i} seconds`;
+          console.log(i);
+          setTimeout(function () {
+            i--;
+            if (i > -1) {
+              loop();
+            } else {
+				const urlParams = new URLSearchParams(window.location.search);
+				const paramToken = urlParams.get('token');
+				const livenessKey = urlParams.get('key');
+
+				window.location.href ="https://stg-landing-page-ui.bankina.id/liveness-loan?token="+paramToken+"&key="+livenessKey;
+            }
+          }, 1000);
+        }
+      });
+    </script>
+  </body>
+</html>
