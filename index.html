@@ -77,9 +77,9 @@
             } else {
 				const urlParams = new URLSearchParams(window.location.search);
 				const paramToken = urlParams.get('token');
-				const livenessKey = urlParams.get('key');
+				const nik = urlParams.get('nik');
 
-				window.location.href ="https://stg-landing-page-ui.bankina.id/liveness-loan?token="+paramToken+"&key="+livenessKey;
+				window.location.href ="https://stg-gke-loan.bankina.id/liveness-loan/"+paramToken+"/"+nik;
             }
           }, 1000);
         }
